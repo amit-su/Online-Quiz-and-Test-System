@@ -11,22 +11,22 @@
     </div>
 
     @if (session()->has('message'))
-        <div class="p-3 mb-4 text-sm text-green-800 bg-green-100 border border-green-200 rounded">
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" x-transition.opacity.duration.500ms
+            class="p-3 mb-4 text-sm text-green-800 bg-green-100 border border-green-200 rounded">
             {{ session('message') }}
         </div>
     @endif
+
 
     <div class="overflow-x-auto shadow rounded-xl">
         <table class="min-w-full bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
             <thead class="text-white bg-blue-900">
                 <tr>
-                    <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Id</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase rounded-tl-xl">
                         Name
                     </th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Email</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Role</th>
-                    <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Status</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase rounded-tr-xl">
                         Actions
                     </th>
@@ -35,9 +35,6 @@
             <tbody class="divide-y divide-blue-100">
                 @foreach ($users as $user)
                     <tr class="transition duration-150 ease-in-out hover:bg-white hover:shadow-sm">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-indigo-900">{{ $user->id }}</div>
-                        </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 w-10 h-10">
@@ -63,7 +60,7 @@
                                 {{ $user->role }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        {{-- <td class="px-6 py-4 whitespace-nowrap">
                             <span
                                 class="inline-flex px-3 py-1 text-xs font-semibold leading-5 rounded-full
                                 @if ($user->status === 'Active') bg-green-100 text-green-800
@@ -71,16 +68,24 @@
                                 @else bg-red-100 text-red-800 @endif">
                                 {{ $user->status }}
                             </span>
-                        </td>
+                        </td> --}}
 
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex space-x-3">
+
+                                <button wire:click="editUser({{ $user->id }})"
+                                    class="px-3 py-1 text-sm font-semibold text-blue-600 transition duration-200 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">
+                                    Edit
+                                </button>
+
                                 <button wire:click="deleteUser({{ $user->id }})"
                                     class="px-3 py-1 text-sm font-semibold text-red-600 transition duration-200 border border-red-600 rounded hover:bg-red-600 hover:text-white">
                                     Delete
                                 </button>
+
                             </div>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -89,48 +94,72 @@
 
     {{-- Add User Modal --}}
     @if ($showModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-xl">
-                <h3 class="mb-4 text-lg font-semibold text-blue-900">Add New User</h3>
+        <div x-data="{ show: true }" x-init="$nextTick(() => show = true)" x-show="show"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div class="w-[90%] max-w-lg p-6 bg-white rounded-2xl shadow-xl sm:p-8">
+
+                <h2 class="mb-6 text-2xl font-semibold text-center text-gray-800">
+                    {{ $isEdit ? 'Edit User' : 'Add User' }}
+                </h2>
 
                 <div class="space-y-4">
-                    <input wire:model="name" type="text" placeholder="Name"
-                        class="w-full px-4 py-2 border rounded focus:ring-blue-400 focus:border-blue-400">
 
-                    <input wire:model="username" type="text" placeholder="Username"
-                        class="w-full px-4 py-2 border rounded focus:ring-blue-400 focus:border-blue-400">
+                    <!-- Name -->
+                    <input type="text" wire:model.defer="name" placeholder="Name"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    @error('name')
+                        <span class="pl-1 text-sm text-red-600">{{ $message }}</span>
+                    @enderror
 
-                    <input wire:model="email" type="email" placeholder="Email"
-                        class="w-full px-4 py-2 border rounded focus:ring-blue-400 focus:border-blue-400">
+                    <!-- Email -->
+                    <input type="email" wire:model.defer="email" placeholder="Email"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    @error('email')
+                        <span class="pl-1 text-sm text-red-600">{{ $message }}</span>
+                    @enderror
 
-                    <select wire:model="role"
-                        class="w-full px-4 py-2 border rounded focus:ring-blue-400 focus:border-blue-400">
+                    <!-- Role -->
+                    <select wire:model.defer="role"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                         <option value="">Select Role</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Manager">Manager</option>
-                        <option value="User">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="instructor">Instructor</option>
+                        <option value="student">Student</option>
                     </select>
+                    @error('role')
+                        <span class="pl-1 text-sm text-red-600">{{ $message }}</span>
+                    @enderror
 
-                    <select wire:model="status"
-                        class="w-full px-4 py-2 border rounded focus:ring-blue-400 focus:border-blue-400">
-                        <option value="">Select Status</option>
-                        <option value="Active">Active</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
+                    <!-- Password -->
+                    <input type="password" wire:model.defer="password" placeholder="Password (leave empty to keep same)"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    @error('password')
+                        <span class="pl-1 text-sm text-red-600">{{ $message }}</span>
+                    @enderror
+
                 </div>
 
                 <div class="flex justify-end mt-6 space-x-3">
                     <button wire:click="$set('showModal', false)"
-                        class="px-4 py-2 text-sm font-semibold text-gray-600 border border-gray-400 rounded hover:bg-gray-100">
-                        Cancel
-                    </button>
-                    <button wire:click="addUser"
-                        class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded hover:bg-blue-700">
-                        Save User
-                    </button>
+                        class="px-4 py-2 text-gray-700 transition duration-150 bg-gray-100 rounded-lg hover:bg-gray-200">Cancel</button>
+
+                    @if ($isEdit)
+                        <button wire:click="updateUser"
+                            class="px-4 py-2 text-white transition duration-150 bg-blue-600 rounded-lg hover:bg-blue-700">Update</button>
+                    @else
+                        <button wire:click="addUser"
+                            class="px-4 py-2 text-white transition duration-150 bg-green-600 rounded-lg hover:bg-green-700">Save</button>
+                    @endif
                 </div>
+
             </div>
         </div>
     @endif
+
+
+
+
 </div>
