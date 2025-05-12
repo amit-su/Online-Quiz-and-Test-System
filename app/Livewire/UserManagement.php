@@ -50,17 +50,15 @@ class UserManagement extends Component
         $this->showModal = false;
     }
 
-    public function deleteUser()
+    public function deleteUser($id)
     {
-        session()->flash('message', 'User deleted successfully.');
-
-        // $user = User::find($id);
-        // if ($user) {
-        //     $user->delete();
-        //     session()->flash('message', 'User deleted successfully.');
-        // } else {
-        //     session()->flash('error', 'User not found.');
-        // }
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            session()->flash('message', 'User deleted successfully.');
+        } else {
+            session()->flash('error', 'User not found.');
+        }
     }
 
     private function resetForm()

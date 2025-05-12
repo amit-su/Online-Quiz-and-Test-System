@@ -1,4 +1,4 @@
-<body class="font-sans antialiased bg-gradient-to-br from-blue-50 to-cyan-50" x-data="{ sidebarOpen: true }">
+<div class="font-sans antialiased bg-gradient-to-br from-blue-50 to-cyan-50">
 
     <div class="flex min-h-screen">
 
@@ -27,7 +27,8 @@
 
                 {{-- Admin Menu --}}
                 @if (Auth::user()->role === 'admin')
-                    <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">Admin</div>
+                    <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">Admin
+                    </div>
                     <a href="{{ route('users.index') }}"
                         class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('users.*') ? ' text-white font-semibold border-l-4 border-yellow-300' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24"
@@ -41,7 +42,8 @@
 
                 {{-- Instructor Menu --}}
                 @if (Auth::user()->role === 'instructor')
-                    <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">Instructor
+                    <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">
+                        Instructor
                     </div>
                     <a href="{{ route('quizzes.create') }}"
                         class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('quizzes.create') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
@@ -111,8 +113,7 @@
             {{-- Livewire content --}}
             <main class="flex-1 p-6 overflow-auto ">
                 {{ $slot }}
-                @livewireScripts
             </main>
         </div>
     </div>
-</body>
+</div>
