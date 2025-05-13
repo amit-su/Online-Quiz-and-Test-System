@@ -6,6 +6,8 @@ use App\Livewire\UserManagement;
 use App\Livewire\Dashboard;
 use App\Livewire\Exam;
 use App\Livewire\QuestionManager;
+use App\Livewire\Student\Quiz;
+use App\Livewire\Student\QuizPage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,5 +34,12 @@ Route::middleware('auth')->group(function () {
     // // Reports
     // Route::get('/reports', ReportViewer::class)->name('reports.index');
 });
+
+
+//student
+
+Route::get('/quiz', Quiz::class)->name('Quiz.index');
+Route::get('/quiz-page', QuizPage::class)->name('QuizPage.index');
+
 
 require __DIR__ . '/auth.php';
