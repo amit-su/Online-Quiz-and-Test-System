@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\exam_sedule;
+use App\Models\Question;
 
 class Exam extends Component
 {
@@ -85,15 +86,26 @@ class Exam extends Component
     public function delete($id)
     {
         $exam = exam_sedule::find($id);
+        $qustion = Question::find($id);
 
         if ($exam) {
             $exam->delete();
+            $qustion->delete();
             session()->flash('success', 'deleted successfully.');
             $this->render();
         } else {
             session()->flash('error', 'User not found.');
         }
     }
+
+
+    public function navigateToQuestions($examId)
+    {
+        session(['exam_id' => $examId]);
+        return redirect()->route('questions.index');
+    }
+
+
 
     private function resetForm()
     {

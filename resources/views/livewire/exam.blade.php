@@ -69,6 +69,12 @@
                                     Edit
                                 </button>
 
+                                <button wire:click="navigateToQuestions({{ $exam->id }})"
+                                    class="px-3 py-1 text-sm font-semibold text-blue-600 transition duration-200 border border-green-600 rounded hover:bg-green-600 hover:text-white">
+                                    Set Question
+                                </button>
+
+
                                 <button wire:click="delete({{ $exam->id }})"
                                     class="px-3 py-1 text-sm font-semibold text-red-600 transition duration-200 border border-red-600 rounded hover:bg-red-600 hover:text-white">
                                     Delete

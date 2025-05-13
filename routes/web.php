@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\UserManagement;
 use App\Livewire\Dashboard;
 use App\Livewire\Exam;
+use App\Livewire\QuestionManager;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/examSedule', Exam::class)->name('exam.index');
 
     // // Question Bank
-    // Route::get('/questions', QuestionBank::class)->name('questions.index');
+    Route::get('/questions-set', QuestionManager::class)->name('questions.index');
 
     // // Reports
     // Route::get('/reports', ReportViewer::class)->name('reports.index');
