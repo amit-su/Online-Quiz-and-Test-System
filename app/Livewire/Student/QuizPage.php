@@ -63,22 +63,27 @@ class QuizPage extends Component
 
     public function saveAnswer()
     {
-        // If they somehow clicked “Next” despite having attempted, bail:
+        // Prevent re-attempts
         if ($this->attempted) {
             session()->flash('error', 'You have already attempted this quiz.');
             return;
         }
 
         $question = $this->questions[$this->currentIndex];
-        $letter   = $this->selectedAnswer;
-        $optKey   = 'option_' . strtolower($letter);
+        $letter = $this->selectedAnswer;
+        $optKey = 'option_' . strtolower($letter);
         $answerText = $question[$optKey] ?? $letter;
 
+        // Fetch correct answer from DB
+        $dbQuestion = Question::find($question['id']);
+        $isCorrect = strtolower(trim($answerText)) === strtolower(trim($dbQuestion->correct_answer)) ? 1 : 0;
+
         Answer::create([
-            'user_id'     => Auth::id(),
-            'question_id' => $question['id'],
-            'exam_id'     => $this->examId,
-            'answer'      => $answerText,
+            'user_id'        => Auth::id(),
+            'question_id'    => $question['id'],
+            'exam_id'        => $this->examId,
+            'answer'         => $answerText,
+            'correct_answer' => $isCorrect,
         ]);
 
         $this->selectedAnswer = null;
@@ -89,6 +94,7 @@ class QuizPage extends Component
             $this->attempted = true;
         }
     }
+
 
     public function render()
     {

@@ -1,8 +1,8 @@
-<div class="bg-[#f2f8fc] font-sans antialiased ">
+<div class="font-sans antialiased ">
 
     <div class="flex h-screen ">
         <!-- Sidebar -->
-        <aside class="flex flex-col justify-between w-64 bg-white shadow-lg">
+        <aside class="flex flex-col justify-between w-64 bg-white shadow-stone-300xl">
             <div>
                 <div class="flex items-center p-8 mb-6 text-2xl font-bold text-blue-800 border-b-2">
                     <span class="mr-2">🎧</span>
@@ -15,7 +15,7 @@
                         <p class="text-xs text-gray-500">Student</p>
                     </div>
                 </div>
-                <div class="h-[45rem] bg-sky-600 [border-top-right-radius:4rem]">
+                <div class="h-[45rem] bg-blue-900 [border-top-right-radius:4rem]">
                     <nav class="space-y-2 text-sm text-gray-600">
 
 
@@ -29,6 +29,16 @@
                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                 </svg>
                                 Quiz
+                            </a>
+
+                            <a href="{{ route('complitesQuizes.index') }}"
+                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('QuizPage.index') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                Complited Quiz
                             </a>
                         @endif
 
@@ -87,7 +97,7 @@
                 </div>
             </div>
             <!-- Dynamic Slot Content -->
-            <div class="flex-1 space-y-6 overflow-y-auto">
+            <div class="flex-1 space-y-6 overflow-y-auto bg-blue-50 ">
                 {{ $slot }}
             </div>
         </main>

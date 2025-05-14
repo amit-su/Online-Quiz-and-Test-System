@@ -25,8 +25,8 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // public function exam()
-    // {
-    //     return $this->belongsTo(ExamSchedule::class, 'exam_id');
-    // }
+    public function exam()
+    {
+        return $this->belongsTo(exam_sedule::class, 'exam_id');
+    }
 }

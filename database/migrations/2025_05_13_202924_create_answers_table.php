@@ -13,19 +13,10 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->foreignId('question_id')
-                ->constrained()
-                ->onDelete('cascade');
-
-            // point to the correct exams table:
-            $table->foreignId('exam_id')
-                ->constrained('exam_sedules')
-                ->onDelete('cascade');
-            $table->string('correct_answer');
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->foreignId('exam_id')->constrained('exam_sedules');
+            $table->boolean('correct_answer'); // <-- fixed
             $table->text('answer');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@ use App\Livewire\Exam;
 use App\Livewire\QuestionManager;
 use App\Livewire\Student\Quiz;
 use App\Livewire\Student\QuizPage;
+use App\Livewire\Student\ComplitesQuiz;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,6 +41,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/quiz', Quiz::class)->name('Quiz.index');
 Route::get('/quiz-page', QuizPage::class)->name('QuizPage.index');
-
+Route::get('/complitesQuizes', ComplitesQuiz::class)->name('complitesQuizes.index');
 
 require __DIR__ . '/auth.php';

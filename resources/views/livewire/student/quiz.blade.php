@@ -1,4 +1,4 @@
-<div class="min-h-screen p-4 bg-gray-50 md:p-8">
+<div class="min-h-screen p-4 md:p-8">
     <div class="mx-auto max-w-7xl">
         <!-- Header -->
         <header class="mb-8">
@@ -40,7 +40,7 @@
 
             @foreach (['Today', 'Tomorrow', 'Upcoming'] as $group)
                 @if (count($grouped[$group]))
-                    <section class="space-y-4">
+                    <section class="space-y-4 ">
                         <h2 class="flex items-center text-xl font-semibold text-gray-700">
                             <span class="mr-2">
                                 @if ($group === 'Today')
@@ -69,7 +69,7 @@
                                 @endphp
 
                                 <div
-                                    class="overflow-hidden transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md">
+                                    class="overflow-hidden transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-xl hover:shadow-md">
                                     <div class="p-5">
                                         <div class="flex items-start justify-between">
                                             <h3 class="mb-1 text-lg font-semibold text-gray-800">
