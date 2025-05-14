@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('exam_schedule');
             $table->integer('duration');
             $table->unsignedBigInteger('created_by'); // FK to users (role = 'admin')
+            $table->string('exam_type');
+            $table->boolean('status');
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

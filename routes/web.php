@@ -9,6 +9,7 @@ use App\Livewire\QuestionManager;
 use App\Livewire\Student\Quiz;
 use App\Livewire\Student\QuizPage;
 use App\Livewire\Student\ComplitesQuiz;
+use App\Livewire\Test;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
     // Quiz Management
     Route::get('/examSedule', Exam::class)->name('exam.index');
-
+    Route::get('/testsedule', Test::class)->name('test.index');
     // // Question Bank
     Route::get('/questions-set', QuestionManager::class)->name('questions.index');
 

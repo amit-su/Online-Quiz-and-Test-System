@@ -4,16 +4,17 @@
         <!-- Sidebar -->
         <aside class="flex flex-col justify-between w-64 bg-white shadow-stone-300xl">
             <div>
-                <div class="flex items-center p-8 mb-6 text-2xl font-bold text-blue-800 border-b-2">
-                    <span class="mr-2">🎧</span>
-                    JustListen
+                <div class="flex items-center p-8 text-2xl font-bold text-blue-800 border-b-2">
+                    {{-- <span class="mr-2">🎧</span> --}}
+                    NIC
                 </div>
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full" alt="Avatar" />
-                    <div>
-                        <h4 class="font-semibold text-gray-800">Haleema Sultan</h4>
-                        <p class="text-xs text-gray-500">Student</p>
+                <div class="flex items-center p-8 space-x-2">
+                    <div class="w-8 h-8 overflow-hidden rounded-full bg-cyan-300">
+                        <img class="object-cover w-full h-full"
+                            src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=random' }}"
+                            alt="">
                     </div>
+                    <div class="text-lg font-semibold">{{ Auth::user()->name }}</div>
                 </div>
                 <div class="h-[45rem] bg-blue-900 [border-top-right-radius:4rem]">
                     <nav class="space-y-2 text-sm text-gray-600">
@@ -22,7 +23,7 @@
                         @if (Auth::user()->role === 'student')
                             <a href="#" class="flex items-center gap-3 p-2 text-blue-600 rounded">Dashboard</a>
                             <a href="{{ route('Quiz.index') }}"
-                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('QuizPage.index') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('Quiz.index') ? 'bg-white text-blue-500 font-semibold border-l-4 border-yellow-300' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,7 +33,7 @@
                             </a>
 
                             <a href="{{ route('complitesQuizes.index') }}"
-                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('QuizPage.index') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('complitesQuizes.index') ? 'bg-white text-blue-500  font-semibold border-l-4 border-yellow-300' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,17 +61,6 @@
 
                 <!-- Right: Icons and Avatar -->
                 <div class="flex items-center space-x-4">
-                    <!-- Search (Optional) -->
-                    <div class="relative hidden md:block">
-                        <input type="text" placeholder="Search..."
-                            class="px-4 py-2 pl-10 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                        <svg class="absolute w-4 h-4 text-gray-500 left-3 top-2.5" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-                        </svg>
-                    </div>
-
                     <!-- Notifications Icon -->
                     <button class="relative">
                         <svg class="w-6 h-6 text-gray-600 hover:text-blue-500" fill="none" stroke="currentColor"

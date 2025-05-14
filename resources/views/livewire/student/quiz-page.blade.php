@@ -1,4 +1,4 @@
-<div class="max-w-2xl p-6 mx-auto bg-white shadow-lg rounded-2xl">
+<div class="max-w-4xl p-6 mx-auto my-16 bg-white shadow-lg rounded-2xl">
     {{-- Countdown Timer --}}
     <div class="p-4 mb-4 text-center bg-gray-100 rounded-lg" x-data="countdownTimer('{{ $examEnd->format('Y-m-d H:i:s') }}')">
         <div class="text-lg font-semibold text-gray-800">
