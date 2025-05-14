@@ -11,6 +11,7 @@ class Answer extends Model
         'question_id',
         'exam_id',
         'answer',
+        'correct_answer'
     ];
 
     // Relationships

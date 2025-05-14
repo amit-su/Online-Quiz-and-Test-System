@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('exam_id')
                 ->constrained('exam_sedules')
                 ->onDelete('cascade');
+            $table->string('correct_answer');
 
             $table->text('answer');
             $table->timestamps();

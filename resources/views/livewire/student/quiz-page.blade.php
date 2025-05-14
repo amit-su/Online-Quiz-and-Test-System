@@ -1,4 +1,15 @@
 <div class="max-w-2xl p-6 mx-auto bg-white shadow-lg rounded-2xl">
+    {{-- Countdown Timer --}}
+    <div class="p-4 mb-4 text-center bg-gray-100 rounded-lg" x-data="countdownTimer('{{ $examEnd->format('Y-m-d H:i:s') }}')">
+        <div class="text-lg font-semibold text-gray-800">
+            Time Remaining:
+            <span x-text="timeLeft" :class="'text-red-600': timeLeft.includes('00:') || timeLeft === 'Time\\'s up!'"
+                class="font-mono"></span>
+        </div>
+        <p class="text-sm text-gray-600">
+            Exam ends at {{ $examEnd->format('h:i A') }}
+        </p>
+    </div>
 
     {{-- Check if current time is within exam window --}}
     @if ($now->lt($examStart) || $now->gt($examEnd))
@@ -77,4 +88,44 @@
             {{ session('success') }}
         </div>
     @endif
+
+    <script>
+        function countdownTimer(endTimeStr) {
+            return {
+                timeLeft: 'Calculating...',
+                interval: null,
+                init() {
+                    const endTime = new Date(endTimeStr);
+                    this.updateTime(endTime);
+                    this.interval = setInterval(() => this.updateTime(endTime), 1000);
+                },
+                updateTime(endTime) {
+                    const now = new Date();
+                    const diff = endTime - now;
+
+                    if (diff <= 0) {
+                        this.timeLeft = "Time's up!";
+                        clearInterval(this.interval);
+                        // Trigger Livewire auto-submit
+                        Livewire.dispatch('timerExpired');
+                        return;
+                    }
+
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    if (hours > 0) {
+                        this.timeLeft =
+                            `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                    } else {
+                        this.timeLeft = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                    }
+                },
+                destroy() {
+                    clearInterval(this.interval);
+                }
+            }
+        }
+    </script>
 </div>

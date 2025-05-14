@@ -4,6 +4,7 @@ namespace App\Livewire\Student;
 
 use Livewire\Component;
 use App\Models\exam_sedule;
+use Carbon\Carbon;
 
 class Quiz extends Component
 {
@@ -15,8 +16,12 @@ class Quiz extends Component
 
     public function render()
     {
+        $exams = exam_sedule::latest()->get();
+        $now = now();
 
-        $exam = exam_sedule::latest()->get();
-        return view('livewire..student.quiz', ['exam' => $exam]);
+        return view('livewire.student.quiz', [
+            'exams' => $exams,
+            'now' => $now,
+        ]);
     }
 }

@@ -1,10 +1,10 @@
-<div class="bg-[#f2f8fc] font-sans antialiased">
+<div class="bg-[#f2f8fc] font-sans antialiased ">
 
-    <div class="flex h-screen">
+    <div class="flex h-screen ">
         <!-- Sidebar -->
-        <aside class="flex flex-col justify-between w-64 p-4 bg-white shadow-lg">
+        <aside class="flex flex-col justify-between w-64 bg-white shadow-lg">
             <div>
-                <div class="flex items-center mb-6 text-2xl font-bold text-blue-800">
+                <div class="flex items-center p-8 mb-6 text-2xl font-bold text-blue-800 border-b-2">
                     <span class="mr-2">🎧</span>
                     JustListen
                 </div>
@@ -15,26 +15,25 @@
                         <p class="text-xs text-gray-500">Student</p>
                     </div>
                 </div>
-                <nav class="space-y-2 text-sm text-gray-600">
-                    <a href="#"
-                        class="flex items-center gap-3 p-2 text-blue-600 bg-blue-100 rounded">Dashboard</a>
+                <div class="h-[45rem] bg-sky-600 [border-top-right-radius:4rem]">
+                    <nav class="space-y-2 text-sm text-gray-600">
 
-                    @if (Auth::user()->role === 'student')
-                        <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">
-                            Instructor
-                        </div>
-                        <a href="{{ route('Quiz.index') }}"
-                            class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('QuizPage.index') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                            </svg>
-                            Quiz
-                        </a>
-                    @endif
 
-                </nav>
+                        @if (Auth::user()->role === 'student')
+                            <a href="#" class="flex items-center gap-3 p-2 text-blue-600 rounded">Dashboard</a>
+                            <a href="{{ route('Quiz.index') }}"
+                                class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('QuizPage.index') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                Quiz
+                            </a>
+                        @endif
+
+                    </nav>
+                </div>
             </div>
 
         </aside>
@@ -43,9 +42,9 @@
 
         <!-- Main Content -->
         <!-- Main Content -->
-        <main class="flex-1 p-6 space-y-6 overflow-y-auto">
+        <main class="flex flex-col flex-1 overflow-hidden">
             <!-- Top Bar -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between px-6 py-4 bg-white shadow-md">
                 <!-- Left: Title or Search -->
                 <h2 class="text-2xl font-bold text-gray-800">Dashboard</h2>
 
@@ -88,7 +87,9 @@
                 </div>
             </div>
             <!-- Dynamic Slot Content -->
-            {{ $slot }}
+            <div class="flex-1 space-y-6 overflow-y-auto">
+                {{ $slot }}
+            </div>
         </main>
 
     </div>
