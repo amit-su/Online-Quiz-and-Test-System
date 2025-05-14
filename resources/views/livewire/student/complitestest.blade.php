@@ -1,5 +1,5 @@
 <div class="p-6 m-10 bg-white shadow-xl md:p-8 rounded-xl">
-    <h2 class="mb-4 text-xl font-semibold text-gray-800">Your Courses</h2>
+    <h2 class="mb-4 text-xl font-semibold text-gray-800">Your Test result</h2>
 
     <div class="flex items-center justify-between mb-4">
         <input type="text" placeholder="Search Course"

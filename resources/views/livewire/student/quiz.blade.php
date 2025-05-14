@@ -2,8 +2,8 @@
     <div class="mx-auto max-w-7xl">
         <!-- Header -->
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Available Exams</h1>
-            <p class="mt-2 text-gray-600">Select an exam to begin your assessment</p>
+            <h1 class="text-3xl font-bold text-gray-800">Available Quizs</h1>
+            <p class="mt-2 text-gray-600">Select an Quiz to begin your assessment</p>
         </header>
 
         <!-- Exam Groups -->
@@ -141,7 +141,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                                 </svg>
-                                                Start Exam
+                                                Start Quiz
                                             </button>
                                         @else
                                             <button disabled

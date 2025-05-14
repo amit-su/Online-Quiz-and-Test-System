@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Answer;
 use App\Models\Question;
 
-class ComplitesQuiz extends Component
+class Complitestest extends Component
 {
     public $completedQuizzes = [];
 
@@ -16,7 +16,7 @@ class ComplitesQuiz extends Component
         $userId = Auth::id();
 
         $this->completedQuizzes = Answer::with(['exam' => function ($query) {
-            $query->where('exam_type', 'quiz');
+            $query->where('exam_type', 'test');
         }])
             ->where('user_id', $userId)
             ->selectRaw('exam_id, COUNT(*) as answered_questions, SUM(correct_answer) as correct_answers')
@@ -36,6 +36,6 @@ class ComplitesQuiz extends Component
 
     public function render()
     {
-        return view('livewire.student.complites-quiz');
+        return view('livewire.student.complitestest');
     }
 }

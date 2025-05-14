@@ -12,6 +12,8 @@ class exam_sedule extends Model
         'exam_schedule',
         'duration',
         'created_by',
+        'exam_type',
+        'status'
     ];
 
     /**

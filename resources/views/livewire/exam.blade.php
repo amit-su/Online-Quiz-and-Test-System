@@ -63,7 +63,13 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex space-x-3">
+                                <!-- Start/Stop Button -->
+                                <button wire:click="toggleStatus({{ $exam->id }})"
+                                    class="px-3 py-1 text-sm font-semibold {{ $exam->status ? 'text-red-600 border-red-600 hover:bg-red-600 hover:text-white' : 'text-green-600 border-green-600 hover:bg-green-600 hover:text-white' }} border rounded transition duration-200">
+                                    {{ $exam->status ? 'Stop' : 'Start' }}
+                                </button>
 
+                                <!-- Existing Buttons -->
                                 <button wire:click="editSchedule({{ $exam->id }})"
                                     class="px-3 py-1 text-sm font-semibold text-blue-600 transition duration-200 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">
                                     Edit
@@ -74,14 +80,13 @@
                                     Set Question
                                 </button>
 
-
                                 <button wire:click="delete({{ $exam->id }})"
                                     class="px-3 py-1 text-sm font-semibold text-red-600 transition duration-200 border border-red-600 rounded hover:bg-red-600 hover:text-white">
                                     Delete
                                 </button>
-
                             </div>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

@@ -15,7 +15,7 @@ class Test extends Component
 
     public function render()
     {
-        $examSchedule = exam_sedule::latest()->get();
+        $examSchedule = exam_sedule::where('exam_type', 'test')->latest()->get();
         return view('livewire.test', ['examSchedule' => $examSchedule]);
     }
 
@@ -40,6 +40,8 @@ class Test extends Component
             'description' => $this->description,
             'exam_schedule' => $this->exam_schedule,
             'duration' => $this->duration,
+            'exam_type' => 'test',
+            'status' => true,
             'created_by' => Auth::id(),
         ]);
 

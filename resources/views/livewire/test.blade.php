@@ -1,12 +1,12 @@
 <div class="p-6 bg-white shadow-xl rounded-2xl">
     <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-semibold text-blue-900">Quiz Sudule</h2>
+        <h2 class="text-xl font-semibold text-blue-900">Test Sudule</h2>
         <button wire:click="showExamScheduleModal"
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            Create New Quiz Sudule
+            Create New Test Sudule
         </button>
     </div>
 
@@ -28,7 +28,7 @@
                         El No
                     </th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">
-                        Quiz Date Time
+                        Test Date Time
                     </th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Duration</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">title</th>
@@ -100,7 +100,7 @@
             class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
 
             <div class="w-[90%] max-w-[900px] p-6 bg-white rounded-2xl shadow-xl sm:p-8">
-                <h2 class="mb-6 text-2xl font-semibold">Create New Quiz</h2>
+                <h2 class="mb-6 text-2xl font-semibold">Create New Test</h2>
 
 
 
@@ -108,7 +108,7 @@
 
                     <!-- Exam Title -->
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">Quiz Title</label>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Test Title</label>
                         <input type="text" wire:model.defer="title" required
                             class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         @error('title')
@@ -118,7 +118,7 @@
 
                     <!-- Description -->
                     <div>
-                        <label for="description" class="block text-sm font-medium text-gray-700">Quiz
+                        <label for="description" class="block text-sm font-medium text-gray-700">Test
                             Description</label>
                         <textarea wire:model.defer="description" rows="3"
                             class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
@@ -129,7 +129,7 @@
 
                     <!-- Exam Schedule -->
                     <div>
-                        <label for="exam_schedule" class="block text-sm font-medium text-gray-700">Quiz Schedule</label>
+                        <label for="exam_schedule" class="block text-sm font-medium text-gray-700">Test Schedule</label>
                         <input type="datetime-local" wire:model.defer="exam_schedule" required
                             class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         @error('exam_schedule')

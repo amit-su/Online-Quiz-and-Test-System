@@ -7,9 +7,13 @@ use App\Livewire\Dashboard;
 use App\Livewire\Exam;
 use App\Livewire\QuestionManager;
 use App\Livewire\Student\Quiz;
+use App\Livewire\Student\TestStudent;
+
 use App\Livewire\Student\QuizPage;
 use App\Livewire\Student\ComplitesQuiz;
+use App\Livewire\Student\Complitestest;
 use App\Livewire\Test;
+use App\Livewire\Student\TestStudentpage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,8 +44,12 @@ Route::middleware('auth')->group(function () {
 
 //student
 
-Route::get('/quiz', Quiz::class)->name('Quiz.index');
 Route::get('/quiz-page', QuizPage::class)->name('QuizPage.index');
 Route::get('/complitesQuizes', ComplitesQuiz::class)->name('complitesQuizes.index');
+Route::get('/quiz', Quiz::class)->name('Quiz.index');
+
+Route::get('/student-test', TestStudentpage::class)->name('TestStudentpage.index');
+Route::get('/test', TestStudent::class)->name('TestStudent.index');
+Route::get('/complitesTest', Complitestest::class)->name('complitesTest.index');
 
 require __DIR__ . '/auth.php';

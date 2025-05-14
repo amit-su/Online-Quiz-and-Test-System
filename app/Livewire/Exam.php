@@ -15,9 +15,18 @@ class Exam extends Component
 
     public function render()
     {
-        $examSchedule = exam_sedule::latest()->get();
+        $examSchedule = exam_sedule::where('exam_type', 'quiz')->latest()->get();
+
         return view('livewire.exam', ['examSchedule' => $examSchedule]);
     }
+
+    public function toggleStatus($id)
+    {
+        $exam = exam_sedule::findOrFail($id);
+        $exam->status = !$exam->status;
+        $exam->save();
+    }
+
 
     public function showExamScheduleModal()
     {
@@ -40,6 +49,8 @@ class Exam extends Component
             'description' => $this->description,
             'exam_schedule' => $this->exam_schedule,
             'duration' => $this->duration,
+            'exam_type' => 'quiz',
+            'status' => true,
             'created_by' => Auth::id(),
         ]);
 
