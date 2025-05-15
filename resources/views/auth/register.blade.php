@@ -1,10 +1,9 @@
 <x-guest-layout>
-    <div
-        class="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
-        <div class="flex w-full max-w-5xl overflow-hidden bg-white shadow-2xl rounded-3xl dark:bg-gray-900">
+    <div class="flex items-center justify-center min-h-screen px-4 py-12 bg-blue-400">
+        <div class="flex w-full max-w-3xl overflow-hidden bg-white shadow-2xl rounded-3xl dark:bg-gray-900">
 
             <!-- Left: Form Section -->
-            <div class="w-full p-10 md:w-1/2">
+            <div class="w-full p-10">
                 <div class="mb-8">
                     <h2 class="mb-2 text-4xl font-bold text-center text-gray-800 dark:text-white">
                         {{ __('Create an account') }}
@@ -73,12 +72,6 @@
                 <p class="mt-6 text-xs text-center text-gray-400">
                     Help@Aura.com
                 </p>
-            </div>
-
-            <!-- Right: Illustration Section -->
-            <div class="items-center justify-center hidden w-1/2 p-6 md:flex bg-gray-50 dark:bg-gray-800">
-                <img src="{{ asset('images/registration-illustration.png') }}" alt="Registration Illustration"
-                    class="w-full max-w-sm">
             </div>
         </div>
     </div>

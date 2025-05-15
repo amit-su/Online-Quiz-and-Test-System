@@ -18,9 +18,10 @@
     @endif
 
 
-    <div class="overflow-x-auto shadow rounded-xl">
+    <div class="overflow-x-auto shadow rounded-xl max-h-[70vh] overflow-y-auto">
+
         <table class="min-w-full bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
-            <thead class="text-white bg-blue-900">
+            <thead class="sticky top-0 text-white bg-blue-900">
                 <tr>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase rounded-tl-xl">
                         Name
@@ -94,11 +95,7 @@
 
     {{-- Add User Modal --}}
     @if ($showModal)
-        <div x-data="{ show: true }" x-init="$nextTick(() => show = true)" x-show="show"
-            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
             <div class="w-[90%] max-w-lg p-6 bg-white rounded-2xl shadow-xl sm:p-8">
 
                 <h2 class="mb-6 text-2xl font-semibold text-center text-gray-800">
@@ -143,7 +140,7 @@
                 </div>
 
                 <div class="flex justify-end mt-6 space-x-3">
-                    <button wire:click="$set('showModal', false)"
+                    <button wire:click="closeModal"
                         class="px-4 py-2 text-gray-700 transition duration-150 bg-gray-100 rounded-lg hover:bg-gray-200">Cancel</button>
 
                     @if ($isEdit)
@@ -158,5 +155,15 @@
             </div>
         </div>
     @endif
+    <p>{{ $userId }}</p>
 
+    <div>
+        <!-- Your component HTML here -->
+
+        <script>
+            Livewire.on('userAdded', () => {
+                location.reload();
+            });
+        </script>
+    </div>
 </div>
