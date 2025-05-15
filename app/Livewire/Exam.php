@@ -20,6 +20,11 @@ class Exam extends Component
         return view('livewire.exam', ['examSchedule' => $examSchedule]);
     }
 
+    public function returnRedirect()
+    {
+        return redirect()->route('exam.index');
+    }
+
     public function toggleStatus($id)
     {
         $exam = exam_sedule::findOrFail($id);
@@ -55,7 +60,7 @@ class Exam extends Component
         ]);
 
         session()->flash('success', 'Exam created successfully!');
-        $this->resetForm();
+        $this->returnRedirect();
         $this->showModal = false;
     }
 
@@ -103,7 +108,7 @@ class Exam extends Component
             $exam->delete();
             $qustion->delete();
             session()->flash('success', 'deleted successfully.');
-            $this->render();
+            $this->returnRedirect();
         } else {
             session()->flash('error', 'User not found.');
         }
@@ -125,5 +130,12 @@ class Exam extends Component
         $this->exam_schedule = '';
         $this->duration = '';
         $this->exam_schedule_id = '';
+    }
+
+    public function closeModal()
+    {
+        $this->resetErrorBag();
+        session()->forget('message');
+        $this->showModal = false;
     }
 }

@@ -39,57 +39,68 @@
                 </tr>
             </thead>
 
-            <tbody class="divide-y divide-blue-100">
+            <tbody class="divide-y divide-gray-200">
                 @foreach ($examSchedule as $exam)
-                    <tr class="transition duration-150 ease-in-out hover:bg-white hover:shadow-sm">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-indigo-900">{{ $loop->iteration }}</div>
+                    <tr
+                        class="p-4 transition duration-300 ease-in-out border border-white rounded-lg hover:bg-indigo-50 hover:shadow-md">
+                        <td class="px-6 py-4 border-white whitespace-nowrap">
+                            <div class="text-lg font-semibold text-indigo-900">{{ $loop->iteration }}</div>
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-lg font-medium text-orange-700">{{ $exam->exam_schedule }}</div>
+                        </td>
 
-                            <div class="text-sm font-medium text-blue-900">{{ $exam->exam_schedule }}
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div
+                                class="inline-block px-3 py-1 text-lg font-semibold text-indigo-700 bg-indigo-100 rounded-full">
+                                {{ $exam->duration }} Minutes
                             </div>
+                        </td>
 
-                        </td>
+
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-indigo-900">{{ $exam->duration }}</div>
+                            <div class="text-lg font-medium text-indigo-900">{{ $exam->title }}</div>
                         </td>
+
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-indigo-900">{{ $exam->title }}</div>
+                            <div class="text-lg text-gray-500">{{ $exam->created_at->format('M d, Y') }}</div>
                         </td>
+
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-indigo-900">{{ $exam->created_at }}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex space-x-3">
+                            <div class="flex space-x-2">
                                 <!-- Start/Stop Button -->
                                 <button wire:click="toggleStatus({{ $exam->id }})"
-                                    class="px-3 py-1 text-sm font-semibold {{ $exam->status ? 'text-red-600 border-red-600 hover:bg-red-600 hover:text-white' : 'text-green-600 border-green-600 hover:bg-green-600 hover:text-white' }} border rounded transition duration-200">
+                                    class="px-3 py-1 text-sm font-semibold rounded-lg border transition duration-200
+                        {{ $exam->status
+                            ? 'bg-red-600 text-white border-red-600 hover:bg-red-700'
+                            : 'bg-green-600 text-white border-green-600 hover:bg-green-700' }}">
                                     {{ $exam->status ? 'Stop' : 'Start' }}
                                 </button>
 
-                                <!-- Existing Buttons -->
+                                <!-- Edit Button -->
                                 <button wire:click="editSchedule({{ $exam->id }})"
-                                    class="px-3 py-1 text-sm font-semibold text-blue-600 transition duration-200 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">
+                                    class="px-3 py-1 text-sm font-semibold text-white transition duration-200 bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700">
                                     Edit
                                 </button>
 
+                                <!-- Set Question Button -->
                                 <button wire:click="navigateToQuestions({{ $exam->id }})"
-                                    class="px-3 py-1 text-sm font-semibold text-blue-600 transition duration-200 border border-green-600 rounded hover:bg-green-600 hover:text-white">
+                                    class="px-3 py-1 text-sm font-semibold text-white transition duration-200 border rounded-lg bg-emerald-600 border-emerald-600 hover:bg-emerald-700">
                                     Set Question
                                 </button>
 
+                                <!-- Delete Button -->
                                 <button wire:click="delete({{ $exam->id }})"
-                                    class="px-3 py-1 text-sm font-semibold text-red-600 transition duration-200 border border-red-600 rounded hover:bg-red-600 hover:text-white">
+                                    class="px-3 py-1 text-sm font-semibold text-white transition duration-200 bg-red-600 border border-red-600 rounded-lg hover:bg-red-700">
                                     Delete
                                 </button>
                             </div>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
+
         </table>
     </div>
 
@@ -155,7 +166,7 @@
 
                     <!-- Submit Button -->
                     <div class="flex justify-end mt-6 space-x-3">
-                        <button wire:click="$set('showModal', false)"
+                        <button wire:click="closeModal"
                             class="px-4 py-2 text-gray-700 transition duration-150 bg-gray-100 rounded-lg hover:bg-gray-200">Cancel</button>
                         @if ($showEdit)
                             <button type="submit" wire:click='update'

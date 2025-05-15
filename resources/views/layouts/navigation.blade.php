@@ -30,7 +30,7 @@
                     <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">Admin
                     </div>
                     <a href="{{ route('users.index') }}"
-                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('users.*') ? ' text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('users.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -39,7 +39,7 @@
                         Manage Users
                     </a>
                     <a href="{{ route('exam.index') }}"
-                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('exam.*') ? ' text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('exam.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,7 +48,7 @@
                         Quiz Sudule
                     </a>
                     <a href="{{ route('test.index') }}"
-                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('test.*') ? ' text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                        class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('test.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

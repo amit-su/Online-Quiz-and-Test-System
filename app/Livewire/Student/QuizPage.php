@@ -21,6 +21,7 @@ class QuizPage extends Component
     public $examStart = '';
     public $examEnd = '';
     public $now;
+    public $startTime;
 
     public function mount()
     {
@@ -44,9 +45,9 @@ class QuizPage extends Component
         $this->examEnd = $endTime;
 
 
-        if (! $now->between($startTime, $endTime)) {
-            abort(403, 'You are not allowed to start the exam at this time.');
-        }
+        // if (! $now->between($startTime, $endTime)) {
+        //     abort(403, 'You are not allowed to start the exam at this time.');
+        // }
 
 
         $this->attempted = Answer::where('user_id', Auth::id())

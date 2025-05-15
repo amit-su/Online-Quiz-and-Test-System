@@ -234,16 +234,25 @@
         </div>
 
         @if (count($exams) === 0)
-            <div class="py-12 text-center">
-                <svg class="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h3 class="mt-2 text-lg font-medium text-gray-900">No exams available</h3>
-                <p class="mt-1 text-sm text-gray-500">There are currently no scheduled exams. Please check back later.
+            <div
+                class="flex flex-col items-center justify-center py-16 shadow-xl bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 rounded-xl">
+                <div class="p-6 bg-white rounded-full shadow-md">
+                    <svg class="w-16 h-16 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                    </svg>
+                </div>
+                <h3 class="mt-6 text-2xl font-semibold text-gray-800">No Quiz Available</h3>
+                <p class="max-w-md mt-2 text-sm text-center text-gray-600">
+                    Oops! There are no scheduled Quiz at the moment. We're working on updating the schedule. Please
+                    check back soon.
                 </p>
+                <button
+                    class="px-6 py-2 mt-6 font-medium text-white transition bg-indigo-500 rounded-full shadow hover:bg-indigo-600">
+                    Refresh
+                </button>
             </div>
         @endif
+
     </div>
 </div>

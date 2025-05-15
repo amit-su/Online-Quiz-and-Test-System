@@ -14,6 +14,7 @@ use App\Livewire\Student\ComplitesQuiz;
 use App\Livewire\Student\Complitestest;
 use App\Livewire\Test;
 use App\Livewire\Student\TestStudentpage;
+use App\Livewire\Student\Studentdasbord;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
 
 //student
-
+Route::get('/student-dasbord', Studentdasbord::class)->name('Studentdasbord.index');
 Route::get('/quiz-page', QuizPage::class)->name('QuizPage.index');
 Route::get('/complitesQuizes', ComplitesQuiz::class)->name('complitesQuizes.index');
 Route::get('/quiz', Quiz::class)->name('Quiz.index');

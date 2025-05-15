@@ -11,18 +11,24 @@ class UserManagement extends Component
     public $showModal = false;
     public $isEdit = false;  // Add this to differentiate between Add/Edit
     public $userId;          // For editing existing user
-
+    public $users;
     public $name, $email, $role, $password;
 
     public function render()
     {
-        $users = User::latest()->get();
-
-        return view('livewire.user-management', [
-            'users' => $users,
-        ]);
+        $this->gateAlluser();
+        return view('livewire.user-management');
     }
 
+    public function returnRedirect()
+    {
+        return redirect()->route('users.index');
+    }
+
+    public function gateAlluser()
+    {
+        $this->users = User::latest()->get();
+    }
     public function showAddUserModal()
     {
         $this->resetForm();
@@ -50,10 +56,13 @@ class UserManagement extends Component
         $this->render();
         $this->resetForm();
         $this->showModal = false;
+        $this->returnRedirect();
     }
+
 
     public function editUser($id)
     {
+        $user = '';
         $user = User::findOrFail($id);
 
         $this->userId = $user->id;
@@ -99,9 +108,16 @@ class UserManagement extends Component
         if ($user) {
             $user->delete();
             session()->flash('message', 'User deleted successfully.');
+            $this->returnRedirect();
         } else {
             session()->flash('error', 'User not found.');
         }
+    }
+    public function closeModal()
+    {
+        $this->resetErrorBag();
+        session()->forget('message');
+        $this->showModal = false;
     }
 
     private function resetForm()

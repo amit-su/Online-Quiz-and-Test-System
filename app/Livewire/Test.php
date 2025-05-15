@@ -19,6 +19,11 @@ class Test extends Component
         return view('livewire.test', ['examSchedule' => $examSchedule]);
     }
 
+    public function returnRedirect()
+    {
+        return redirect()->route('test.index');
+    }
+
     public function showExamScheduleModal()
     {
         $this->resetForm();
@@ -46,7 +51,7 @@ class Test extends Component
         ]);
 
         session()->flash('success', 'Exam created successfully!');
-        $this->resetForm();
+        $this->returnRedirect();
         $this->showModal = false;
     }
 
@@ -80,7 +85,7 @@ class Test extends Component
         ]);
 
         session()->flash('success', 'updated successfully!');
-        $this->resetForm();
+        $this->returnRedirect();
         $this->showModal = false;
         $this->showEdit = false;
     }
@@ -94,7 +99,8 @@ class Test extends Component
             $exam->delete();
             $qustion->delete();
             session()->flash('success', 'deleted successfully.');
-            $this->render();
+
+            $this->returnRedirect();
         } else {
             session()->flash('error', 'User not found.');
         }
@@ -107,6 +113,12 @@ class Test extends Component
         return redirect()->route('questions.index');
     }
 
+    public function toggleStatus($id)
+    {
+        $exam = exam_sedule::findOrFail($id);
+        $exam->status = !$exam->status;
+        $exam->save();
+    }
 
 
     private function resetForm()
@@ -116,5 +128,12 @@ class Test extends Component
         $this->exam_schedule = '';
         $this->duration = '';
         $this->exam_schedule_id = '';
+    }
+
+    public function closeModal()
+    {
+        $this->resetErrorBag();         // clears @error messages
+        session()->forget('message');   // clears session success message
+        $this->showModal = false;       // hides the modal
     }
 }

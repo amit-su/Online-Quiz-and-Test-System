@@ -2,12 +2,15 @@
 
     <div class="flex h-screen ">
         <!-- Sidebar -->
-        <aside class="flex flex-col justify-between w-64 bg-white shadow-stone-300xl">
-            <div>
+        <aside class="flex flex-col justify-between h-screen bg-white w-[18rem] shadow-stone-300xl">
+            <!-- full viewport height -->
+
+            <div class="flex flex-col flex-grow"> <!-- make this div grow -->
+
                 <div class="flex items-center p-8 text-2xl font-bold text-blue-800 border-b-2">
-                    {{-- <span class="mr-2">🎧</span> --}}
                     NIC
                 </div>
+
                 <div class="flex items-center p-8 space-x-2">
                     <div class="w-8 h-8 overflow-hidden rounded-full bg-cyan-300">
                         <img class="object-cover w-full h-full"
@@ -16,7 +19,9 @@
                     </div>
                     <div class="text-lg font-semibold">{{ Auth::user()->name }}</div>
                 </div>
-                <div class="h-[45rem] bg-blue-900 [border-top-right-radius:4rem]">
+
+                <div class="flex-grow bg-blue-900 rounded-tr-[4rem]">
+
                     <nav class="space-y-2 text-sm text-gray-600">
 
 
