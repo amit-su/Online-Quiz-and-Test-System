@@ -24,6 +24,6 @@ class roleMiddleware
         }
 
         // Redirect or abort if the user doesn't have access
-        return response('Unauthorized access.', 403);
+        return redirect()->route('unauthorized.index');
     }
 }

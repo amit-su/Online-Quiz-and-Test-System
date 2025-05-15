@@ -247,10 +247,7 @@
                     Oops! There are no scheduled Quiz at the moment. We're working on updating the schedule. Please
                     check back soon.
                 </p>
-                <button
-                    class="px-6 py-2 mt-6 font-medium text-white transition bg-indigo-500 rounded-full shadow hover:bg-indigo-600">
-                    Refresh
-                </button>
+
             </div>
         @endif
 
