@@ -31,7 +31,7 @@
                         Quiz Date Time
                     </th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Duration</th>
-                    <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">title</th>
+                    <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Title</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase">Create Date</th>
                     <th class="px-6 py-4 text-sm font-semibold tracking-wider text-left uppercase rounded-tr-xl">
                         Actions
@@ -43,12 +43,15 @@
                 @foreach ($examSchedule as $exam)
                     <tr
                         class="p-4 transition duration-300 ease-in-out border border-white rounded-lg hover:bg-indigo-50 hover:shadow-md">
-                        <td class="px-6 py-4 border-white whitespace-nowrap">
+                        <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-lg font-semibold text-indigo-900">{{ $loop->iteration }}</div>
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-lg font-medium text-orange-700">{{ $exam->exam_schedule }}</div>
+                            <div class="text-lg font-medium text-orange-700 truncate max-w-[200px]"
+                                title="{{ $exam->exam_schedule }}">
+                                {{ $exam->exam_schedule }}
+                            </div>
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -58,9 +61,11 @@
                             </div>
                         </td>
 
-
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-lg font-medium text-indigo-900">{{ $exam->title }}</div>
+                            <div class="text-lg font-medium text-indigo-900 truncate max-w-[200px]"
+                                title="{{ $exam->title }}">
+                                {{ $exam->title }}
+                            </div>
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -72,9 +77,9 @@
                                 <!-- Start/Stop Button -->
                                 <button wire:click="toggleStatus({{ $exam->id }})"
                                     class="px-3 py-1 text-sm font-semibold rounded-lg border transition duration-200
-                        {{ $exam->status
-                            ? 'bg-red-600 text-white border-red-600 hover:bg-red-700'
-                            : 'bg-green-600 text-white border-green-600 hover:bg-green-700' }}">
+                                {{ $exam->status
+                                    ? 'bg-red-600 text-white border-red-600 hover:bg-red-700'
+                                    : 'bg-green-600 text-white border-green-600 hover:bg-green-700' }}">
                                     {{ $exam->status ? 'Stop' : 'Start' }}
                                 </button>
 
@@ -100,9 +105,9 @@
                     </tr>
                 @endforeach
             </tbody>
-
         </table>
     </div>
+
 
 
 

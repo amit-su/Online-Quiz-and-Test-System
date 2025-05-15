@@ -12,9 +12,9 @@ class Studentdasbord extends Component
 {
     public $quizAttempts = 0;
     public $testAttempts = 0;
-    public $todayQuizzes = [];
-    public $todayTests = [];
-
+    public $todayQuizzes = 0;
+    public $todayTests = 0;
+    public $totalQuiz = 0;
     public function mount()
     {
         $userId = Auth::id();
@@ -35,18 +35,28 @@ class Studentdasbord extends Component
             })
             ->select('exam_id')
             ->distinct()
-            ->count();
+            ->count('exam_id');
+
+        // Total quiz attempted
+        $this->totalQuiz = Answer::where('user_id', $userId)
+            ->whereHas('exam', function ($query) {
+                $query->where('exam_type', 'quiz');
+            })
+            ->select('exam_id')
+            ->distinct()
+            ->count('exam_id');
+
 
         // Today’s Exams
         $today = Carbon::today();
 
         $this->todayQuizzes = exam_sedule::whereDate('exam_schedule', $today)
             ->where('exam_type', 'quiz')
-            ->get();
+            ->distinct()->count();
 
         $this->todayTests = exam_sedule::whereDate('exam_schedule', $today)
             ->where('exam_type', 'test')
-            ->get();
+            ->distinct()->count();
     }
 
     public function render()

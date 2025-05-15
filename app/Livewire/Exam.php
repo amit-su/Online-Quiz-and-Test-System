@@ -125,11 +125,13 @@ class Exam extends Component
 
     private function resetForm()
     {
-        $this->title = '';
-        $this->description = '';
-        $this->exam_schedule = '';
-        $this->duration = '';
-        $this->exam_schedule_id = '';
+        $this->reset([
+            'title',
+            'description',
+            'exam_schedule',
+            'duration',
+            'exam_schedule_id'
+        ]);
     }
 
     public function closeModal()

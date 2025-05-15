@@ -166,7 +166,7 @@
             @if (count($grouped['Expired']))
                 <section class="space-y-4">
                     <h2 class="flex items-center text-xl font-semibold text-gray-500">
-                        <span class="mr-2">⌛ Past Exams</span>
+                        <span class="mr-2">⌛ Past Quiz</span>
                         <span
                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                             {{ count($grouped['Expired']) }}

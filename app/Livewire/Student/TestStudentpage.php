@@ -20,7 +20,7 @@ class TestStudentpage extends Component
     public $examStart;
     public $remainingSeconds = 0;
     public $attempted = false;
-
+    public $now;
     protected $listeners = ['timeExpired' => 'autoSubmit'];
 
     public function mount()
@@ -34,11 +34,7 @@ class TestStudentpage extends Component
         $this->examStart = Carbon::parse($exam->exam_schedule);
         $this->examEnd = $this->examStart->copy()->addMinutes($exam->duration);
         $now = Carbon::now();
-
-        if (!$now->between($this->examStart, $this->examEnd)) {
-            abort(403, 'Exam is not active.');
-        }
-
+        $this->now = Carbon::now();
         $this->remainingSeconds = $this->examEnd->diffInSeconds($now, false);
 
         $this->attempted = Answer::where('user_id', Auth::id())
