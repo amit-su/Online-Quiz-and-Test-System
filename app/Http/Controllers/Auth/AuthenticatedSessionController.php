@@ -40,17 +40,11 @@ class AuthenticatedSessionController extends Controller
             case 'student':
                 return redirect()->route('Studentdasbord.index');
                 break;
-            // case 'instructor':
-            //     return redirect()->route('instructor.dashboard');
-            //     break;
+
             default:
-                return redirect()->route('login')->withErrors(['role' => 'Unauthorized role']);
+                return redirect()->route('unauthorized.index');
         }
     }
-
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
