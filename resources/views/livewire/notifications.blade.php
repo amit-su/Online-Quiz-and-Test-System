@@ -1,109 +1,156 @@
-<div class="max-w-4xl p-6 mx-auto bg-white rounded shadow">
+<div class="p-6 bg-white shadow-xl rounded-2xl">
 
-    <h1 class="mb-6 text-2xl font-bold">Manage Notifications</h1>
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold">Manage Notifications</h1>
+        <button wire:click="$set('showModal', true)" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+            + Create Notification
+        </button>
+    </div>
 
-    @if (session()->has('success'))
-        <div class="p-3 mb-4 text-green-700 bg-green-100 rounded">
-            {{ session('success') }}
+    {{-- Notification Popup --}}
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            window.addEventListener('notification:success', event => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: event.detail.message,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+            });
+        </script>
+    @endpush
+
+    {{-- Modal Form --}}
+    @if ($showModal)
+        <div x-data="{ show: true }" x-init="$nextTick(() => show = true)" x-show="show"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+            <div class="w-full max-w-2xl p-6 bg-white rounded shadow-lg">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold">
+                        {{ $isEditMode ? 'Edit Notification' : 'Create Notification' }}
+                    </h2>
+                    <button wire:click="$set('showModal', false)"
+                        class="text-gray-500 hover:text-gray-800">&times;</button>
+                </div>
+
+                <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}" class="space-y-4">
+
+                    <div>
+                        <label class="block mb-1 font-semibold">Title</label>
+                        <input type="text" wire:model.defer="title"
+                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                        @error('title')
+                            <span class="text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label class="block mb-1 font-semibold">Message</label>
+                        <textarea wire:model.defer="message" rows="4"
+                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        @error('message')
+                            <span class="text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div>
+                            <label class="block mb-1 font-semibold">Schedule Date & Time</label>
+                            <input type="datetime-local" wire:model.defer="schedule_date"
+                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                            @error('schedule_date')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block mb-1 font-semibold">Expire Date & Time</label>
+                            <input type="datetime-local" wire:model.defer="expire_date"
+                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                            @error('expire_date')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" wire:model="status" id="status" />
+                        <label for="status" class="font-semibold select-none">Active</label>
+                    </div>
+
+                    <div class="flex justify-end gap-4 pt-4 border-t">
+                        <button type="button" wire:click="$set('showModal', false)"
+                            class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                            {{ $isEditMode ? 'Update' : 'Create' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     @endif
 
-    {{-- Form --}}
-    <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}" class="mb-8 space-y-4">
-
-        <div>
-            <label class="block mb-1 font-semibold">Title</label>
-            <input type="text" wire:model.defer="title" class="w-full px-3 py-2 border rounded" />
-            @error('title')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <label class="block mb-1 font-semibold">Message</label>
-            <textarea wire:model.defer="message" rows="4" class="w-full px-3 py-2 border rounded"></textarea>
-            @error('message')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <label class="block mb-1 font-semibold">Schedule Date & Time</label>
-            <input type="datetime-local" wire:model.defer="schedule_date" class="w-full px-3 py-2 border rounded" />
-            @error('schedule_date')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <label class="block mb-1 font-semibold">Expire Date & Time</label>
-            <input type="datetime-local" wire:model.defer="expire_date" class="w-full px-3 py-2 border rounded" />
-            @error('expire_date')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="flex items-center gap-2">
-            <input type="checkbox" wire:model="status" id="status" />
-            <label for="status" class="font-semibold select-none">Active</label>
-            @error('status')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
-                {{ $isEditMode ? 'Update Notification' : 'Create Notification' }}
-            </button>
-
-            @if ($isEditMode)
-                <button type="button" wire:click="resetInputFields"
-                    class="px-4 py-2 ml-4 text-white bg-gray-400 rounded hover:bg-gray-500">
-                    Cancel
-                </button>
-            @endif
-        </div>
-    </form>
-
-    {{-- Notifications List --}}
-    <table class="w-full border border-collapse border-gray-300 table-auto">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="p-2 text-left border border-gray-300">Title</th>
-                <th class="p-2 text-left border border-gray-300">Message</th>
-                <th class="p-2 text-left border border-gray-300">Schedule Date</th>
-                <th class="p-2 text-left border border-gray-300">Expire Date</th>
-                <th class="p-2 text-center border border-gray-300">Status</th>
-                <th class="p-2 text-center border border-gray-300">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($notifications as $notification)
-                <tr class="border-t border-gray-300">
-                    <td class="p-2 border border-gray-300">{{ $notification->title }}</td>
-                    <td class="p-2 border border-gray-300">
-                        {{ \Illuminate\Support\Str::limit($notification->message, 50) }}</td>
-                    <td class="p-2 border border-gray-300">{{ $notification->schedule_date->format('Y-m-d H:i') }}</td>
-                    <td class="p-2 border border-gray-300">{{ $notification->expire_date->format('Y-m-d H:i') }}</td>
-                    <td class="p-2 text-center border border-gray-300">
-                        @if ($notification->status)
-                            <span class="font-semibold text-green-600">Active</span>
-                        @else
-                            <span class="font-semibold text-red-600">Inactive</span>
-                        @endif
-                    </td>
-                    <td class="p-2 space-x-2 text-center border border-gray-300">
-                        <button wire:click="edit({{ $notification->id }})"
-                            class="text-blue-600 hover:underline">Edit</button>
-
-                        <button wire:click="delete({{ $notification->id }})"
-                            onclick="confirm('Delete this notification?') || event.stopImmediatePropagation()"
-                            class="text-red-600 hover:underline">Delete</button>
-                    </td>
+    {{-- Table --}}
+    <div class="overflow-x-auto shadow rounded-xl">
+        <table class="min-w-full text-sm bg-white border border-gray-200 rounded-xl">
+            <thead class="text-white bg-blue-900">
+                <tr>
+                    <th class="px-4 py-3 text-left">Title</th>
+                    <th class="px-4 py-3 text-left">Message</th>
+                    <th class="px-4 py-3 text-left">Schedule Date</th>
+                    <th class="px-4 py-3 text-left">Expire Date</th>
+                    <th class="px-4 py-3 text-center">Status</th>
+                    <th class="px-4 py-3 text-center">Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="text-gray-700 divide-y divide-gray-200">
+                @forelse ($notifications as $notification)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3">{{ $notification->title }}</td>
+                        <td class="px-4 py-3">{{ \Illuminate\Support\Str::limit($notification->message, 40) }}</td>
+                        <td class="px-4 py-3">{{ $notification->schedule_date->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 py-3">{{ $notification->expire_date->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 py-3 text-center">
+                            @if ($notification->status)
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
+                                    Active
+                                </span>
+                            @else
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">
+                                    Inactive
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            <button wire:click="edit({{ $notification->id }})"
+                                class="px-3 py-1 text-sm font-semibold text-white transition duration-200 bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700">Edit</button>
+                            <button wire:click="delete({{ $notification->id }})"
+                                onclick="confirm('Are you sure to delete this notification?') || event.stopImmediatePropagation()"
+                                class="px-3 py-1 text-sm font-semibold text-white transition duration-200 bg-red-600 border border-red-600 rounded-lg hover:bg-red-700">Delete</button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="px-4 py-4 text-center text-gray-500">No notifications found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
 
     <div class="mt-4">
         {{ $notifications->links() }}

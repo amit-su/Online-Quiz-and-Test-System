@@ -34,40 +34,48 @@
                         </div>
                         <a href="{{ route('users.index') }}"
                             class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('users.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                            <!-- Users Icon: User Group -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    d="M17 20h5v-1a6 6 0 00-9-5.197M9 20H4v-1a6 6 0 019-5.197M15 7a4 4 0 10-8 0 4 4 0 008 0zm6 4a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                             Manage Users
                         </a>
+
                         <a href="{{ route('exam.index') }}"
                             class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('exam.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                            <!-- Quiz Icon: Clipboard Check -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    d="M9 17l-2-2m0 0l-2-2m2 2l2-2m-2 2h6m4-5V5a2 2 0 00-2-2h-3.5a1.5 1.5 0 00-3 0H6a2 2 0 00-2 2v3m16 4H4v8a2 2 0 002 2h12a2 2 0 002-2v-8z" />
                             </svg>
-                            Quiz Sudule
+                            Quiz Schedule
                         </a>
+
                         <a href="{{ route('test.index') }}"
                             class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('test.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                            <!-- Test Icon: Document Text -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    d="M8 16h8M8 12h8m-6 4h6m2 4H6a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
                             </svg>
-                            Test Sudule
+                            Test Schedule
                         </a>
+
                         <a href="{{ route('admin.notifications.index') }}"
                             class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('admin.notifications.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                            <!-- Notification Icon: Bell -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-5-5.917V5a1 1 0 10-2 0v.083A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
                             Notifications
                         </a>
+
 
 
                         {{-- <a href="{{ route('questions.index') }}"
@@ -86,14 +94,23 @@
                         <div class="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-blue-300 uppercase">
                             Instructor
                         </div>
-                        <a href="{{ route('quizzes.create') }}"
-                            class="flex items-center px-4 py-3 text-blue-100 transition-all duration-200 rounded-r-lg hover:bg-blue-500 hover:text-white {{ request()->routeIs('quizzes.create') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                        <a href="{{ route('exam.index') }}"
+                            class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('exam.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            Create Quiz
+                            Quiz Sudule
+                        </a>
+                        <a href="{{ route('test.index') }}"
+                            class="flex items-center px-4 py-3 text-white transition-all duration-200 rounded-r-lg hover:text-green-200 {{ request()->routeIs('test.*') ? 'bg-blue-500 text-white font-semibold border-l-4 border-yellow-300' : '' }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            Test Sudule
                         </a>
                     @endif
                 </nav>
