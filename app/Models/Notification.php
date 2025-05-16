@@ -19,4 +19,11 @@ class Notification extends Model
         'expire_date' => 'datetime',
         'status' => 'boolean',
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', true)
+            ->where('schedule_date', '<=', now())
+            ->where('expire_date', '>=', now());
+    }
 }

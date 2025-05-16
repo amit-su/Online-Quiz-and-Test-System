@@ -34,15 +34,15 @@ class AuthenticatedSessionController extends Controller
         $role = Auth::user()->role;
 
         switch ($role) {
-            case 'admin || instructor':
+            case 'admin':
                 return redirect()->route('dashboard');
                 break;
             case 'student':
                 return redirect()->route('Studentdasbord.index');
                 break;
-
             default:
                 return redirect()->route('unauthorized.index');
+                break;
         }
     }
     public function destroy(Request $request): RedirectResponse

@@ -16,6 +16,7 @@ use App\Livewire\Test;
 use App\Livewire\Student\TestStudentpage;
 use App\Livewire\Student\Studentdasbord;
 use App\Livewire\Notifications;
+use App\Livewire\Student\Alert;
 use App\Livewire\UnauthorizedAccess;
 
 Route::aliasMiddleware('role', \App\Http\Middleware\RoleMiddleware::class);
@@ -30,7 +31,7 @@ Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.
 
 Route::get('/unauthorized', UnauthorizedAccess::class)->name('unauthorized.index');
 
-Route::middleware('role:admin,instructor')->group(function () {
+Route::middleware('role:admin')->group(function () {
     Route::get('/admin/notifications', Notifications::class)->name('admin.notifications.index');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/userManagement', UserManagement::class)->name('users.index');
@@ -50,6 +51,17 @@ Route::middleware('role:student')->group(function () {
     Route::get('/student-test', TestStudentpage::class)->name('TestStudentpage.index');
     Route::get('/test', TestStudent::class)->name('TestStudent.index');
     Route::get('/complitesTest', Complitestest::class)->name('complitesTest.index');
+    Route::get('/student/notifications', Alert::class)->name('student.alert');
 });
+
+
+// Route::middleware('role:instructor')->group(function () {
+//     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+//     Route::get('/examSedule', Exam::class)->name('exam.index');
+//     Route::get('/testsedule', Test::class)->name('test.index');
+//     Route::get('/questions-set', QuestionManager::class)->name('questions.index');
+// });
+
+
 
 require __DIR__ . '/auth.php';

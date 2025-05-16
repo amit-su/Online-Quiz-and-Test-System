@@ -13,7 +13,7 @@ class Notifications extends Component
     public $title, $message, $schedule_date, $expire_date, $status = false;
     public $notificationId; // for edit
     public $isEditMode = false;
-
+    public $showModal = false;
     protected $rules = [
         'title' => 'required|max:255',
         'message' => 'required',
@@ -24,16 +24,24 @@ class Notifications extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    public function returnRedirect()
+    {
+        return redirect()->route('admin.notifications.index');
+    }
+
     public function resetInputFields()
     {
-        $this->title = '';
-        $this->message = '';
-        $this->schedule_date = '';
-        $this->expire_date = '';
-        $this->status = false;
-        $this->notificationId = null;
-        $this->isEditMode = false;
+        $this->reset([
+            'title',
+            'message',
+            'schedule_date',
+            'expire_date',
+            'status',
+            'notificationId',
+            'isEditMode',
+        ]);
     }
+
 
 
 
@@ -52,6 +60,7 @@ class Notifications extends Component
         session()->flash('success', 'Notification created successfully.');
 
         $this->resetInputFields();
+        $this->returnRedirect();
     }
 
     public function edit($id)
@@ -64,6 +73,7 @@ class Notifications extends Component
         $this->expire_date = $notification->expire_date->format('Y-m-d\TH:i');
         $this->status = $notification->status;
         $this->isEditMode = true;
+        $this->showModal = true;
     }
 
     public function update()
@@ -81,7 +91,7 @@ class Notifications extends Component
             ]);
 
             session()->flash('success', 'Notification updated successfully.');
-
+            $this->returnRedirect();
             $this->resetInputFields();
         }
     }
@@ -90,6 +100,7 @@ class Notifications extends Component
     {
         Notification::findOrFail($id)->delete();
         session()->flash('success', 'Notification deleted successfully.');
+        $this->returnRedirect();
     }
     public function render()
     {
